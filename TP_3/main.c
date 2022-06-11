@@ -17,7 +17,6 @@ int main()
     if(listaPasajeros == NULL)
     	printf("Error en la carga de linkedlist.\n");
 
-
     do{
         system("cls");
         MostrarMenu();
@@ -115,6 +114,7 @@ int main()
             	{
              		printf("Antes de salir deber guardar en archivo los datos cargados. \n");
              	}
+                system("pause");
             	break;
         }
     }while(option != 10);

@@ -15,9 +15,9 @@
 void MostrarMenu(void)
 {
 
-    printf("-------------------------------------------------------\n");
-	printf("************* TP 3 *************\n");
-    printf("-------------------------------------------------------\n");
+    printf("---------------------------------------------------------------------------------\n");
+	printf("*********************************** TP 3 ****************************************\n");
+    printf("---------------------------------------------------------------------------------\n");
     printf("01. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n");
     printf("02. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).	\n");
     printf("03. Alta de pasajero\n");
@@ -28,7 +28,7 @@ void MostrarMenu(void)
     printf("08. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).\n");
     printf("09. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).\n");
     printf("10. Salir: \n");
-    printf("-------------------------------------------------------\n\n");
+    printf("---------------------------------------------------------------------------------\n");
 
 }
 

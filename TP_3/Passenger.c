@@ -390,7 +390,7 @@ int ShowPassenger(Passenger* this)
 			   Passenger_getTipoPasajero(this, tipoPasajero) &&
 			   Passenger_getEstadoVuelo(this, estadoVuelo)))
 		{
-			printf("%d		%10s		%10s		%.2f		%10s		%10s		%10s \n", id, nombre, apellido, precio, codigoVuelo, tipoPasajero, estadoVuelo);
+			printf("%d		%10s		%10s		%.2f		%10s		%10s		%10s\n", id, nombre, apellido, precio, codigoVuelo, tipoPasajero, estadoVuelo);
 			rta = 1;
 		}
 	}
@@ -410,8 +410,7 @@ int ShowPassengers(LinkedList* pArrayListPassenger)
 
 	if(pArrayListPassenger != NULL)
 	{
-		printf("Id		Nombre		Apellido		Precio		Codigo de vuelo		Tipo de pasajero		Estado de vuelo	\n");
-
+		printf("Id		     Nombre		 Apellido	        Precio			Codigo de vuelo		Tipo de pasajero	Estado de vuelo	\n");
 		for(i=0; i<ll_len(pArrayListPassenger); i++)
 		{
 			ShowPassenger((Passenger*)ll_get(pArrayListPassenger, i));

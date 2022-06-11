@@ -341,7 +341,7 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger, int* flagA, int* f
 	{
 		if(pArrayListPassenger !=NULL)
 		{
-			printf("\t*** Lista de pasajeros ***\n");
+			printf("\t\t\t*** Lista de pasajeros ***\n\n");
 			ShowPassengers(pArrayListPassenger);
 			rta = 1;
 		}
