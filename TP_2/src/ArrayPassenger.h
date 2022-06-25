@@ -105,7 +105,7 @@ int removePassenger(ePassenger* list, int len, int id);
  * \param order
  * \return 0
  */
-int sortPassengers1(ePassenger* list, int len, int order); //Ordena el array de pasajeros por apellido y tipo de pasajero de manera ascendente o descendente.
+int sortPassengers1(ePassenger* list, int len, int order, eTypePassenger* listType, eStatusFlight* listStatus); //Ordena el array de pasajeros por apellido y tipo de pasajero de manera ascendente o descendente.
 
 
 /**
@@ -135,7 +135,7 @@ int printUnPasajero(ePassenger list, eTypePassenger* listType, eStatusFlight* li
  * \param order
  * \return 0.
  */
-int sortPassengersBycode(ePassenger* list, int len, int order); //Ordena el array de pasajeros por código de vuelo y estado de vuelo de manera ascendente o descendente.
+int sortPassengersBycode(ePassenger* list, int len, int order, eTypePassenger* listType, eStatusFlight* listStatus); //Ordena el array de pasajeros por código de vuelo y estado de vuelo de manera ascendente o descendente.
 
 /**
  * \brief calcula y muestra total, promedio y pasajero que supera el promedio de los precios ingresados

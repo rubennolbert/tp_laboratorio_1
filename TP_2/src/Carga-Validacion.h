@@ -58,6 +58,14 @@ int FuncionMenu(char mensaje[], int min, int max);
 void HardcodeoPasajeros(ePassenger* list);
 
 /**
+ * \brief carga una cadena y la valida
+ * \param mensaje
+ * \param cadena
+ * \return devuelve la cadena por referncia
+ */
+void getStringValidate(char mensaje[],char cadena[]);
+
+/**
  * \brief carga una cadena
  * \param mensaje
  * \param cadena

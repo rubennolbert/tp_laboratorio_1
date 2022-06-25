@@ -76,6 +76,7 @@ int addPassenger(ePassenger* list, int len, int id, char name[],char lastName[],
         //printf("\n____%s: \n", list[index].flyCode);
 
         printUnPasajero(list[index], listType, listStatus);
+        system("pause");
         rta = 0;
     }
 
@@ -183,25 +184,44 @@ int ModificarPasajero(ePassenger* list, int len)
 
 int removePassenger(ePassenger* list, int len, int id)
 {
-    int index;
+    int index = -1;
+    char opcion;
 
     if(list != NULL)
     {
         index = findPassengerById(list, len, id);
-        if(index != -1)
+        printf("\tConfirme baja de datos s/n:  ");
+        fflush(stdin);
+        scanf("%c", &opcion);
+        opcion = tolower(opcion);
+
+        while(opcion != 's' && opcion != 'n')
         {
-            for(int i=0; i<len; i++)
-            {
-                if(id == list[i].id)
+        	printf("\tError, Confirme baja de datos s/n:  ");
+			fflush(stdin);
+			scanf("%c", &opcion);
+			opcion = tolower(opcion);
+        }
+
+        if(index != -1 && opcion == 's')
+        {
+
+                for(int i=0; i<len; i++)
                 {
-                    list[i].isEmpty = -1;
-                    printf("\tDatos borrados. \n");
+                    if(id == list[i].id)
+                    {
+                        list[i].isEmpty = -1;
+                        printf("\tDatos borrados. \n");
+                        system("pause");
+                    }
                 }
-            }
+
         }
         else
         {
-            printf("\tERROR en la busqueda del id. \n");
+            printf("\t cancelacion de baja de datos.  \n");
+            index = -1;
+            system("pause");
         }
     }
 
@@ -209,7 +229,7 @@ int removePassenger(ePassenger* list, int len, int id)
     return index;
 }
 
-int sortPassengers1(ePassenger* list, int len, int order)  //Ordena el array de pasajeros por apellido y tipo de pasajero de manera ascendente o descendente.
+int sortPassengers1(ePassenger* list, int len, int order, eTypePassenger* listType, eStatusFlight* listStatus)  //Ordena el array de pasajeros por apellido y tipo de pasajero de manera ascendente o descendente.
 {
     int i, j;
 
@@ -247,6 +267,9 @@ int sortPassengers1(ePassenger* list, int len, int order)  //Ordena el array de 
 
         }
     }
+
+    printf("\t\t------------ Lista pasajeros por apellido y tipo de pasajero ---------------\n\n");
+    printPassenger(list, len, listType, listStatus);   //1 list pass por apellido y tipo
 
     return 0;
 }
@@ -330,47 +353,56 @@ int printUnPasajero(ePassenger list, eTypePassenger* listType, eStatusFlight* li
     return 0;
 }
 
-int sortPassengersBycode(ePassenger* list, int len, int order)  //Ordena el array de pasajeros por código de vuelo y estado de vuelo de manera ascendente o descendente.
+int sortPassengersBycode(ePassenger* list, int len, int order, eTypePassenger* listType, eStatusFlight* listStatus)  //Ordena el array de pasajeros por código de vuelo y estado de vuelo de manera ascendente o descendente.
 {
     int i, j;
     ePassenger auxListPass;
 
-    if(list != NULL && len > 0 && order == 1)
+    if(list != NULL && len > 0)
     {
-        for(i=0; i<len - 1; i++)
-        {
-            for(j=i + 1; j<len; j++)
-            {
-                if((strcmp(list[i].flyCode, list[j].flyCode)>0 && list[i].statusFlight == list[j].statusFlight) || (list[i].statusFlight > list[j].statusFlight))
-                {
-                    auxListPass = list[i];
-                    list[i] = list[j];
-                    list[j] = auxListPass;
-                }
-            }
+			if(order == 1)
+			{
+				for(i=0; i<len - 1; i++)
+				{
+					for(j=i + 1; j<len; j++)
+					{
+						if((strcmp(list[i].flyCode, list[j].flyCode)>0 && list[i].statusFlight == list[j].statusFlight) || (list[i].statusFlight > list[j].statusFlight))
+						{
+							auxListPass = list[i];
+							list[i] = list[j];
+							list[j] = auxListPass;
+						}
+					}
+				}
+			}
+			else if(order == 0)
+			{
+				for(i=0; i<len - 1; i++)
+				{
+					for(j=i + 1; j<len; j++)
+					{
+						if((strcmp(list[i].flyCode, list[j].flyCode)<0 && list[i].statusFlight == list[j].statusFlight) || (list[i].statusFlight < list[j].statusFlight)) // @suppress("Suggested parenthesis around expression")
+						{
+							auxListPass = list[i];
+							list[i] = list[j];
+							list[j] = auxListPass;
+						}
+					}
+				}
+			}
 
-        }
+
+			printf("\t\t------------ Lista pasajeros por codigo de vuelo y estado activo -----------\n\n");
+			printPassenger(list, len, listType, listStatus);
+
+
+
+
     }
-    else if(order == 0)
+    else
     {
-        for(i=0; i<len - 1; i++)
-        {
-            for(j=i + 1; j<len; j++)
-            {
-                if((strcmp(list[i].flyCode, list[j].flyCode)<0 && list[i].statusFlight == list[j].statusFlight) || (list[i].statusFlight < list[j].statusFlight)) // @suppress("Suggested parenthesis around expression")
-                {
-                    auxListPass = list[i];
-                    list[i] = list[j];
-                    list[j] = auxListPass;
-                }
-            }
-
-        }
+    	printf("\tError con el ordenamiento. \n");
     }
-
-
-
-
 
 
     return 0;
@@ -384,7 +416,7 @@ int TotalPromedioPrecios(ePassenger* list, int tam)
     int contadorI = 0;
     int cantPasajeros = 0;
 
-    if(list != NULL )
+    if(list != NULL && tam > 0)
     {
         for(i=0; i<tam; i++)
             if(list[i].isEmpty == FALSE)
@@ -396,8 +428,13 @@ int TotalPromedioPrecios(ePassenger* list, int tam)
         promedio = total/contadorI;
 
         for(i=0; i<tam; i++)
-            if(list[i].price > promedio && list[i].isEmpty == FALSE)
+        {
+        	if(list[i].price > promedio && list[i].isEmpty == FALSE)
+        	{
                 cantPasajeros ++;
+        	}
+        }
+
 
         printf("\n\t--  PRECIOS VUELO:  Total: %.2f     Promedio: %.2f    Cantidad de pasajeros mayor al promedio: %d  --\n\n", total, promedio, cantPasajeros);
 

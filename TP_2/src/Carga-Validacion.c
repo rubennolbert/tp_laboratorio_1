@@ -5,6 +5,12 @@
  *      Author: ruben
  */
 
+
+
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -58,6 +64,7 @@ int esSoloLetras(char cadena[])
 
 void MostrarMenu(void)
 {
+	printf("********************* TP 2 - ABM **********************\n");
     printf("-------------------------------------------------------\n");
     printf("1. Altas: \n");
     printf("2. Modificar: \n");
@@ -108,12 +115,32 @@ void HardcodeoPasajeros(ePassenger* list)
 
 }
 
-void getString(char mensaje[],char cadena[])
+void getStringValidate(char mensaje[],char cadena[])
 {
+	int i1;
 
     printf("%s",mensaje);
     fflush(stdin);
     scanf ("%s", cadena);
+    i1 = esSoloLetras(cadena);
+	while(i1 == 0)
+	{
+		printf("Error, ingrese nuevamente: ");
+		fflush(stdin);
+		scanf ("%s", cadena);
+		i1 = esSoloLetras(cadena);
+	}
+
+}
+
+void getString(char mensaje[],char cadena[])
+{
+
+
+    printf("%s",mensaje);
+    fflush(stdin);
+    scanf ("%s", cadena);
+
 }
 float getFloat(char mensaje[])
 {
@@ -138,5 +165,6 @@ int getInt(char mensaje[])
 
     return auxInt;
 }
+
 
 
