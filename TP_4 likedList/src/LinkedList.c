@@ -550,6 +550,37 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux =-1;
 
+    void* pElementA = NULL;
+    void* pElementB = NULL;
+    void* auxElement = NULL;
+    int tam = ll_len(this);
+    int i,j;
+    int funcCriterio;
+
+    if(this != NULL && pFunc != NULL && tam > 0 && (order == 1 || order == 0))
+    {
+    	for(i=0; i < tam-1; i++)
+    	{
+
+    		for(j = i+1; j < tam; j++)
+    		{
+    			pElementA = ll_get(this, i);
+    			pElementB = ll_get(this, j);
+
+    			funcCriterio = pFunc(pElementA, pElementB);
+
+    			if((funcCriterio > 0 && order == 1) || (funcCriterio < 0 && order == 0))
+    			{
+    				auxElement = pElementA;
+    				ll_set(this, i, pElementB);
+    				ll_set(this, j, auxElement);
+
+    			}
+    		}
+    	}
+    	returnAux = 0;
+    }
+
     return returnAux;
 
 }
